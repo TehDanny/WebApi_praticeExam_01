@@ -40,5 +40,15 @@ namespace WebApiWebApplication.Controllers
         {
             return Models.AuctionHouseData.GetAllAuctions();
         }
+
+        public Models.AuctionItem GetAuction(int itemNumber)
+        {
+            return Models.AuctionHouseData.GetAuction(itemNumber);
+        }
+
+        public void BidOnProduct(Models.Bid bid)
+        {
+            Models.AuctionHouseData.BidOnAuction(bid);
+        }
     }
 }
