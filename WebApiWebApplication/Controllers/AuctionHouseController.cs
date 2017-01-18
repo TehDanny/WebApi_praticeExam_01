@@ -35,5 +35,10 @@ namespace WebApiWebApplication.Controllers
         public void Delete(int id)
         {
         }
+
+        public List<Models.AuctionItem> GetAllAuctions()
+        {
+            return Models.AuctionHouseData.GetAllAuctions();
+        }
     }
 }

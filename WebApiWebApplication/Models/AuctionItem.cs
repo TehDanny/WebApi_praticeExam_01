@@ -26,12 +26,12 @@ namespace WebApiWebApplication.Models
             BidTimestamp = bidTimestamp;
         }
 
-        static internal void HardcodeProducts()
+        static internal void HardcodeAuctions()
         {
             AuctionItem p1 = new AuctionItem(1, "Brugt cykel", 1000.00M, 500.00M, "Daniel Alexander Nedergaard", 12345678, DateTime.Now);
             AuctionItem p2 = new AuctionItem(2, "Smart ny bil", 50000.00M, 75000.00M, "Bjørk", 87654321, DateTime.Now);
-            AuctionHouseData.AddProduct(p1);
-            AuctionHouseData.AddProduct(p2);
+            AuctionHouseData.AddAuction(p1);
+            AuctionHouseData.AddAuction(p2);
         }
     }
 }

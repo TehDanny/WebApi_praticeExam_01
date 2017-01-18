@@ -8,30 +8,30 @@ namespace WebApiWebApplication.Models
 {
     public class AuctionHouseData
     {
-        private static List<AuctionItem> ItemList = new List<AuctionItem>();
+        private static List<AuctionItem> AuctionList = new List<AuctionItem>();
         private static object myLock = new object();
 
-        internal static void AddProduct(AuctionItem p)
+        internal static void AddAuction(AuctionItem p)
         {
-            ItemList.Add(p);
+            AuctionList.Add(p);
         }
 
-        internal static List<AuctionItem> GetAllProducts()
+        internal static List<AuctionItem> GetAllAuctions()
         {
-            if (ItemList.Count == 0)
-                AuctionItem.HardcodeProducts();
+            if (AuctionList.Count == 0)
+                AuctionItem.HardcodeAuctions();
 
-            return ItemList;
+            return AuctionList;
         }
 
-        internal static AuctionItem GetProduct(int itemNumber)
+        internal static AuctionItem GetAuction(int itemNumber)
         {
-            if (ItemList.Count == 0)
-                AuctionItem.HardcodeProducts();
+            if (AuctionList.Count == 0)
+                AuctionItem.HardcodeAuctions();
 
             lock (myLock)
             {
-                foreach (var item in ItemList)
+                foreach (var item in AuctionList)
                 {
                     if (item.ItemNumber == itemNumber)
                         return item;
@@ -41,16 +41,16 @@ namespace WebApiWebApplication.Models
             return null;
         }
 
-        internal static void BidOnProduct(Bid bid)
+        internal static void BidOnAuction(Bid bid)
         {
             lock (myLock)
             {
-                bool itemExists = false;
-                foreach (var item in ItemList)
+                bool auctionExists = false;
+                foreach (var item in AuctionList)
                 {
                     if (bid.ItemNumber == item.ItemNumber)
                     {
-                        itemExists = true;
+                        auctionExists = true;
                         if (bid.Price > item.BidPrice)
                         {
                             item.BidPrice = bid.Price;
@@ -62,8 +62,8 @@ namespace WebApiWebApplication.Models
                             throw new Exception("Bid is too low.");
                     }
                 }
-                if (itemExists == false)
-                    throw new Exception("Product doesn't exist.");
+                if (auctionExists == false)
+                    throw new Exception("Auction doesn't exist.");
             }
         }
     }
